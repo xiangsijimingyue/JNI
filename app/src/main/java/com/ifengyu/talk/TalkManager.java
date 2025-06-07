@@ -88,13 +88,12 @@ public class TalkManager {
 
     /************************ Native 方法声明 ************************/
 
-    public native String stringFromJNI();
-
     /**
      * A native method that is implemented by the 'talk' native library,
      * which is packaged with this application.
      */
-//    public static native String stringFromJNI();
+    public native String stringFromJNI();
+
 
 //    private static native int network_init(NetworkConfig config, NetworkEventCallback callback);
 //
