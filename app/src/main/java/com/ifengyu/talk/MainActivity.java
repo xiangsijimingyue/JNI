@@ -9,11 +9,6 @@ import com.ifengyu.talk.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Used to load the 'talk' library on application startup.
-    static {
-        System.loadLibrary("talk");
-    }
-
     private ActivityMainBinding binding;
 
     @Override
@@ -25,12 +20,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = binding.sampleText;
-        tv.setText(stringFromJNI());
+//        tv.setText(TalkManager.getInstance().stringFromJNI());
     }
 
-    /**
-     * A native method that is implemented by the 'talk' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
+
 }
