@@ -26,5 +26,7 @@ Java_com_ifengyu_talk_TalkManager_stringFromJNI(JNIEnv *env, jobject thiz) {
     //字符串格式化
     sprintf(str, "Native Caculate : Static Library (CMake Build) : %d + %d ", 1, 2);
 
+    //sdk_logout();
+
     return env->NewStringUTF(str);
 }

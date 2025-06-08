@@ -51,6 +51,7 @@ add_library(
         IMPORTED)
 
 
+message( WARNING "静态库导入路径 : ${CMAKE_SOURCE_DIR}/src/main/jniLibs/arm64-v8a/libtalkcore_arm64-v8a.a")
 # Specifies libraries CMake should link to your target library. You
 # can link libraries from various origins, such as libraries defined in this
 # build script, prebuilt third-party libraries, or Android system libraries.
@@ -61,15 +62,10 @@ add_library(
 #           ③ 参数 3 ( IMPORTED_LOCATION ) : 设置导入路径
 #           ④ 参数 4 : 配置静态库的文件路径
 set_target_properties(
-        # 设置目标
         talkcore
-        # 设置属性
         PROPERTIES
-        # 导入路径
         IMPORTED_LOCATION
-        # ${CMAKE_SOURCE_DIR} 是本 CMakeList.txt 构建脚本的路径 , 是 CMake 工具内置的变量
-        #       Android CMake 也内置了一些变量 , 如 ANDROID_ABI
-        ${CMAKE_SOURCE_DIR}/../jniLibs/arm64-v8a/libtalkcore_arm64-v8a.a)
+        ${PROJECT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI}/libtalkcore_arm64-v8a.a)
 
 # 打印日志信息
 #       ${ANDROID_ABI} 的作用是获取当前的 CPU 指令集架构
@@ -100,8 +96,8 @@ find_library(
 #       参数 1 : 本构建脚本要生成的动态库目 标
 #       参数 2 ~ ... : 后面是之前预编译的动态库或静态库 , 或引入的动态库
 
-target_link_libraries(${CMAKE_PROJECT_NAME}
-        # List libraries link to the target library
-        # 表示 编译 native-lib 模块, 要链接 add 模块
-        talkcore
-        ${log-lib})
+## 设置函数库编译
+file(GLOB SRC_LIST ${PROJECT_SOURCE_DIR}/extern_src/*.c)
+add_library(extern-lib SHARED ${SRC_LIST})
+
+target_link_libraries(${CMAKE_PROJECT_NAME} talkcore ${log-lib} extern-lib)
