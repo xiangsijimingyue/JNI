@@ -34,8 +34,8 @@ add_library( # 参数 1 : 设置生成的动态库名称
         native-lib.cpp)
 
 # 设置头文件目录
-include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/include)
-message( WARNING "设置头文件目录 : ${CMAKE_SOURCE_DIR}/src/main/cpp/include")
+include_directories(${PROJECT_SOURCE_DIR}/include)
+message( WARNING "设置头文件目录 : ${PROJECT_SOURCE_DIR}/include")
 
 # 引入静态库
 #       ① 参数 1 ( talk ) : 设置引入的静态库名称
@@ -69,7 +69,7 @@ set_target_properties(
         IMPORTED_LOCATION
         # ${CMAKE_SOURCE_DIR} 是本 CMakeList.txt 构建脚本的路径 , 是 CMake 工具内置的变量
         #       Android CMake 也内置了一些变量 , 如 ANDROID_ABI
-        ${CMAKE_SOURCE_DIR}/../jniLibs/armeabi-v7a/libadd.a)
+        ${CMAKE_SOURCE_DIR}/../jniLibs/arm64-v8a/libtalkcore_arm64-v8a.a)
 
 # 打印日志信息
 #       ${ANDROID_ABI} 的作用是获取当前的 CPU 指令集架构

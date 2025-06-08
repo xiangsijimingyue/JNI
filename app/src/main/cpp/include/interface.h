@@ -17,7 +17,7 @@ typedef unsigned short uint16_t;
 typedef unsigned int uint32_t;
 #endif
 #if !defined(uint64_t)
-typedef unsigned long long uint64_t;
+typedef unsigned long  uint64_t;
 #endif
 #else
 // C99及以上环境直接包含标准头文件

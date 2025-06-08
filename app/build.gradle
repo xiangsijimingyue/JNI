@@ -25,7 +25,7 @@ android {
                 cppFlags ""
 
                 //配置编译 C/C++ 源文件为哪几个 CPU 指令集的函数库 (arm , x86 等)
-                abiFilters "armeabi-v7a"
+                abiFilters "arm64-v8a"
             }
             /*ndkBuild{
                 abiFilters "armeabi-v7a" *//*, "arm64-v8a", "x86", "x86_64"*//*
@@ -42,7 +42,7 @@ android {
         //        那么为了控制打包后的应用大小, 可以选择性打包一些库 , 此处就是进行该配置
         ndk{
             // 打包生成的 APK 文件指挥包含 ARM 指令集的动态库
-            abiFilters "armeabi-v7a" /*, "arm64-v8a", "x86", "x86_64"*/
+            abiFilters "arm64-v8a" /*, "arm64-v8a", "x86", "x86_64"*/
         }
 
     }
@@ -59,7 +59,7 @@ android {
     }
     externalNativeBuild {
         cmake {
-            version '3.22.1'
+            version '4.0.2'
             path file('src/main/cpp/CMakeLists.txt')
         }
     }
