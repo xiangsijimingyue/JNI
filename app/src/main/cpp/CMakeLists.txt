@@ -28,12 +28,14 @@ project("talk")
 # 设置函数库编译
 add_library( # 参数 1 : 设置生成的动态库名称
         ${CMAKE_PROJECT_NAME}
-
         # 参数 2 : 设置生成的函数库类型 : ① 静态库 STATIC ② 动态库 SHARED
         SHARED
-
         # 参数 3 : 配置要编译的源文件
         native-lib.cpp)
+
+# 设置头文件目录
+include_directories(${CMAKE_SOURCE_DIR}/src/main/cpp/include)
+message( WARNING "设置头文件目录 : ${CMAKE_SOURCE_DIR}/src/main/cpp/include")
 
 # 引入静态库
 #       ① 参数 1 ( talk ) : 设置引入的静态库名称
@@ -43,10 +45,8 @@ add_library( # 参数 1 : 设置生成的动态库名称
 add_library(
         # 设置引入的静态库名称
         talkcore
-
         # 设置引入的函数库类型为静态库
         STATIC
-
         # 表示引入第三方静态库
         IMPORTED)
 
@@ -63,13 +63,10 @@ add_library(
 set_target_properties(
         # 设置目标
         talkcore
-
         # 设置属性
         PROPERTIES
-
         # 导入路径
         IMPORTED_LOCATION
-
         # ${CMAKE_SOURCE_DIR} 是本 CMakeList.txt 构建脚本的路径 , 是 CMake 工具内置的变量
         #       Android CMake 也内置了一些变量 , 如 ANDROID_ABI
         ${CMAKE_SOURCE_DIR}/../jniLibs/armeabi-v7a/libadd.a)
@@ -80,13 +77,7 @@ set_target_properties(
 #           当本次编译 x86 CPU 架构时 , ${ANDROID_ABI} 值为 x86
 message("CMAKE_SOURCE_DIR : ${CMAKE_SOURCE_DIR}, ANDROID_ABI : ${ANDROID_ABI}")
 
-# 到预设的目录查找 log 库 , 将找到的路径赋值给 log-lib
-#   这个路径是 NDK 的 ndk-bundle\platforms\android-29\arch-arm\usr\lib\liblog.so
-#   不同的 Android 版本号 和 CPU 架构 需要到对应的目录中查找 , 此处是 29 版本 32 位 ARM 架构的日志库
-find_library(
-        log-lib
 
-        log)
 
 # 到预设的目录查找 log 库 , 将找到的路径赋值给 log-lib
 #   这个路径是 NDK 的 ndk-bundle\platforms\android-29\arch-arm\usr\lib\liblog.so
