@@ -3,7 +3,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <android/log.h>
+
+extern "C" {
 #include "interface.h"
+}
 
 //调用 libadd.so 动态库中的方法
 //extern "C" {    //注意在 C++ 中调用 C 语言方法 , 需要做兼容设置
@@ -11,7 +14,9 @@
 //}
 
 extern "C"
-JNIEXPORT jstring JNICALL
+JNIEXPORT jstring
+
+JNICALL
 Java_com_ifengyu_talk_TalkManager_stringFromJNI(JNIEnv *env, jobject thiz) {
     //
     //调用动态库中的函数
@@ -26,7 +31,7 @@ Java_com_ifengyu_talk_TalkManager_stringFromJNI(JNIEnv *env, jobject thiz) {
     //字符串格式化
     sprintf(str, "Native Caculate : Static Library (CMake Build) : %d + %d ", 1, 2);
 
-    //sdk_logout();
+    sdk_logout();
 
     return env->NewStringUTF(str);
 }
